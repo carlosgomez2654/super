@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="text-center my-4">Administración de Usuarios</h1>
+
+<div class="text-center">
+    <br>
+    <table class="table table-hover table-bordered bg-white">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Nombre</td>
+                <td>Correo</td>
+                <td>Password</td>
+                <td>Rol</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in usuarios %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.correo }}</td>
+                <td>{{ p.password }}</td>
+                <td>{{ p.rol }}</td>
+                <td>
+                    <a href="/editar/usuario/{{ p.id }}" class="btn btn-primary">Editar</a>
+                    <a href="/eliminar/{{ p.id }}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar sesión</a>
+</div>
+{% endblock %}

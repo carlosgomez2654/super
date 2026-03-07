@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TIENDA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/carrito.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <header class="header-principal">
+
+  <!-- Flecha para volver -->
+  <a href="{{ url_for('index') }}" class="flecha-volver">
+    ←
+  </a>
+
+  <div class="logos">
+    <a href="{{ url_for('cliente_dashboard') }}">
+      <h1 class="logo"><strong>TIENDA</strong></h1>
+      <img src="{{ url_for('static', filename='images/plato.jpg') }}" alt="logo" width="100" height="100">
+    </a>
+  </div>
+
+</header>
+
+  <div class="wrapper">
+    
+      <center>
+        <nav>
+          <ul class="menu">
+
+            <li>
+              <a class="boton-menu boton-categoria {% if categoria==0 %}active{% endif %}"
+                href="{{ url_for('tienda') }}">Todos los productos</a>
+            </li>
+
+            <li>
+              <a class="boton-menu boton-categoria {% if categoria==6 %}active{% endif %}"
+                href="{{ url_for('tienda_categoria', cat=6) }}">FRUTAS & VERDURAS</a>
+            </li>
+
+            <li>
+              <a class="boton-menu boton-categoria {% if categoria==5 %}active{% endif %}"
+                href="{{ url_for('tienda_categoria', cat=5) }}">PAN & DULCES</a>
+            </li>
+
+            <li>
+              <a class="boton-menu boton-categoria {% if categoria==4 %}active{% endif %}"
+                href="{{ url_for('tienda_categoria', cat=4) }}">BEBIDAS</a>
+            </li>
+            <a href="{{ url_for('carrito') }}" class="carrito-link">
+              <i class="bi bi-cart3"></i>
+              <span id="numerito">0</span>
+            </a>
+
+          </ul>
+        </nav>
+      </center>
+    
+
+    <main>
+      <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
+
+      <div id="contenedor-productos" class="contenedor-productos">
+
+        {% for producto in productos %}
+        <div class="producto-card" data-categoria="{{ producto.CATEGORIA_ID }}" data-id="{{ producto.COD_PRODUCTO }}">
+
+          <div class="producto-imagen">
+  {% if producto.IMAGEN_URL %}
+  <img src="{{ url_for('static', filename=producto.IMAGEN_URL) }}" 
+       alt="{{ producto.NOMBRE_PRODUCTO }}">
+  {% else %}
+  <img src="{{ url_for('static', filename='images/placeholder.png') }}" 
+       alt="Sin imagen">
+  {% endif %}
+</div>
+
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">{{ producto.NOMBRE_PRODUCTO }}</h3>
+            <p class="marca">Marca: {{ producto.MARCA or '—' }}</p>
+            <p class="precio">Precio: ${{ producto.PRECIO_VENTA }}</p>
+            <p class="unidad">Unidad: {{ producto.UNIDAD_MEDIDA or '—' }}</p>
+
+            <div style="margin-top:8px">
+              <button class="producto-agregar" data-id="{{ producto.COD_PRODUCTO }}">
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+
+        </div>
+        {% endfor %}
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================
+     PASO MUY IMPORTANTE
+     => ENVÍO PRODUCTOS AL JS
+================================= -->
+  <script>
+  const productos = {{ productos | tojson }};
+</script>
+
+  <!-- ==============================================
+      SISTEMA SIMPLE DE CARRITO (FUNCIONA 100%)
+================================================= -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    const numerito = document.getElementById('numerito');
+    const botones = document.querySelectorAll('.producto-agregar');
+
+    /* =============================
+       FUNCIONES DEL LOCALSTORAGE
+    ============================== */
+    function getCart() {
+      return JSON.parse(localStorage.getItem("productos-en-carrito") || "[]");
+    }
+
+    function setCart(c) {
+      localStorage.setItem("productos-en-carrito", JSON.stringify(c));
+      updateCount();
+    }
+
+    /* =============================
+        ACTUALIZAR ICONO DEL CARRITO
+    ============================== */
+    function updateCount() {
+      const cart = getCart();
+      const total = cart.reduce((acc, p) => acc + p.cantidad, 0);
+      numerito.textContent = total;
+    }
+
+    /* =============================
+        AGREGAR PRODUCTO AL CARRITO
+    ============================== */
+    botones.forEach(boton => {
+      boton.addEventListener("click", () => {
+        const id = boton.dataset.id;
+
+        // Buscamos el producto en la lista completa enviada desde Flask
+        const p = productos.find(x => x.COD_PRODUCTO == id);
+
+        let cart = getCart();
+        let item = cart.find(x => x.id == id);
+
+        if (item) {
+          item.cantidad++;
+        } else {
+          cart.push({
+            id: id,
+            titulo: p.NOMBRE_PRODUCTO,
+            precio: p.PRECIO_VENTA,
+            imagen: p.IMAGEN_URL,
+            cantidad: 1
+          });
+        }
+
+        setCart(cart);
+
+        // Feedback bonito
+        swal("Producto agregado!", p.NOMBRE_PRODUCTO + " se agrego al carrito.", "success");
+      });
+    });
+
+    updateCount();
+  </script>
+
+
+</body>
+
+</html>
