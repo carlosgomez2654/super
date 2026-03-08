@@ -1,5 +1,6 @@
 let productosEnCarrito = JSON.parse(localStorage.getItem("productos-en-carrito") || "[]");
 
+
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
 const contenedorCarritoProductos = document.querySelector("#carrito-productos");
 const contenedorCarritoAcciones = document.querySelector("#carrito-acciones");
@@ -23,6 +24,9 @@ function cargarProductosCarrito() {
         contenedorCarritoProductos.innerHTML = "";
 
         productosEnCarrito.forEach(producto => {
+            if (!producto.imagen.startsWith("/static/")) {
+        producto.imagen = `/static/${producto.imagen}`;
+        }
             const div = document.createElement("div");
             div.classList.add("carrito-producto");
 
