@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --clr-main: rgb(255, 255, 255);
+    --clr-main-light: rgb(153, 190, 249);
+    --clr-white: #575f3c;
+    --clr-gray: #e2e2e2;
+    --clr-red: #961818;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Red Hat Text', sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-image: url(../images/background-pattern.jpg);
+}
+
+/* =============================
+      NAVBAR SUPERIOR
+============================== */
+nav {
+    width: 100%;
+    background-image: url(../images/background-pattern.jpg);
+    background-size: cover;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--clr-white);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-menu button,
+.nav-menu a {
+    background: transparent;
+    border: 0;
+    color: var(--clr-white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    transition: 0.2s;
+}
+
+.nav-menu button:hover,
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.active {
+    background-color: rgb(34, 255, 0) !important;
+    color: var(--clr-main) !important;
+}
+
+/* Carrito */
+.carrito-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--clr-white);
+}
+
+#numerito {
+    background-color: var(--clr-white);
+    color: var(--clr-main);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.4rem;
+    font-weight: 700;
+}
+
+/* =============================
+      CONTENIDO PRINCIPAL
+============================== */
+main {
+    background-color: var(--clr-white);
+    margin: 2rem;
+    border-radius: 1.5rem;
+    padding: 2rem;
+}
+
+.titulo-principal {
+    color: var(--clr-main);
+    margin-bottom: 2rem;
+}
+
+/* =============================
+           PRODUCTOS
+============================== */
+.contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.5rem;
+}
+
+.producto-card {
+    background-color: var(--clr-main);
+    border-radius: 1rem;
+    padding-bottom: 0.8rem;
+    box-shadow: 0 0 5px rgb(255, 255, 255);
+    transition: 0.2s;
+}
+
+.producto-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 10px rgba(0, 0, 0, 0.1);
+}
+
+.producto-imagen img {
+    width: 100%;
+    height: 230px;
+    border-radius: 1rem;
+}
+
+.producto-detalles {
+    margin-top: 0.6rem;
+    padding: 0.8rem;
+    color: var(--clr-white);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.producto-agregar {
+    border: 2px solid var(--clr-white);
+    background-color: var(--clr-white);
+    color: var(--clr-main);
+    padding: 0.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.producto-agregar:hover {
+    background-color: var(--clr-main);
+    color: var(--clr-white);
+}
+
+/* =============================
+        RESPONSIVE
+============================== */
+
+@media (max-width: 850px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* =============================
+        grid
+============================== */
+.slider-descuentos{
+    width: 100%;
+    overflow-x: auto;
+}
+
+.grid-descuentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card-descuento {
+width:250px;
+background:rgb(185, 185, 185);
+text-align:center;
+padding:10px;
+border-radius:10px;
+transition: transform 0.3s ease;
+}
+
+.card-descuento:hover{
+  transform: scale(1.05);
+}
+
+
+.card-descuento img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.marquee{
+  background:#0aff0edb;
+  color:white;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:10px;
+  font-size:20px;
+}
+
+.marquee p{
+  display:inline-block;
+  padding-left:100%;
+  animation:mover 12s linear infinite;
+}
+
+@keyframes mover{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-100%);}
+}
+
+.titulo-super{
+  background: linear-gradient(90deg,#ffffff,#fffb1a);
+  color:rgb(107, 254, 16);
+  font-size:35px;
+  font-weight:bold;
+  text-align:center;
+  padding:15px;
+  border-radius:10px;
+  font-family:'Trebuchet MS', sans-serif;
+}
+
+.barra-ofertas{
+  width:100%;
+  background:#2e7d32;
+  color:white;
+  overflow:hidden;
+  padding:10px 0;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.texto-ofertas{
+  white-space:nowrap;
+  display:inline-block;
+  padding-left:100%;
+  animation: moverTexto 15s linear infinite;
+}
+
+@keyframes moverTexto{
+  0%{
+    transform:translateX(0);
+  }
+  100%{
+    transform:translateX(-100%);
+  }
+}
+
+.header-principal{
+  position: relative;
+}
+
+.flecha-volver{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.flecha-volver:hover{
+  color: green;
+}

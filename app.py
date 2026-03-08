@@ -9,12 +9,12 @@ app.secret_key = os.environ.get("SECRET_KEY", "clave-super-segura")
 # ==========================
 # CONFIG DB
 # ==========================
-db_config = {
-    'host': os.environ.get("DB_HOST"),
-    'user': os.environ.get("DB_USER"),
-    'password': os.environ.get("DB_PASSWORD"),
-    'database': os.environ.get("DB_NAME")
-}
+db_config = { 'host': os.environ.get("DB_HOST"),
+             'port': os.environ.get("DB_PORT"),
+             'user': os.environ.get("DB_USER"),
+             'password': os.environ.get("DB_PASSWORD"),
+             'database': os.environ.get("DB_NAME")
+             }
 
 
 def get_db_connection():
