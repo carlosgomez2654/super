@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="text-center my-4">Bienvenido(a),{{ username }}</h1>
+<center>
+    <h1>Editar Usuario</h1>
+    <form action="" method="post">
+        Nombre: <input type="text" name="nombre" id="" value="{{ usuario[1] }}" required>
+        <br>
+        Email: <input type="text" name="correo" id="" value="{{ usuario[2] }}" required>
+        <br>
+        password: <input type="password" name="password" id="" value="{{ usuario[3] }}" required>
+        <br>
+        <button type="submit" class="btn btn-primary">actualizar</button>
+    </form>
+    <a href="/" class="btn btn-success">Volver</a>
+</center>
+<a href="{{url_for('logout')}}" class="btn btn-danger">cerrar sesion🚀</a>
+{% endblock %}

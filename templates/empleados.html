@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="text-center my-4">Administración de empleados</h1>
+
+<div class="text-center">
+    <br>
+    <table class="table table-hover table-bordered bg-white">
+        <thead>
+            <tr>
+                <td>cod_empleado</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>direccion</td>
+                <td>Telefono</td>
+                <td>Correo</td>
+                <td>no_doc</td>
+                <td>Estado_civil</td>
+                <td>Sexo</td>
+                <td>Eps</td>
+                <td>Cesantias</td>
+                <td>cargo_cod</td>
+                <td>Sucursal</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in empleados %}
+            <tr>
+                <td>{{ p.cod_empleado }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.apellido }}</td>
+                <td>{{ p.direccion }}</td>
+                <td>{{ p.telefono }}</td>
+                <td>{{ p.correo }}</td>
+                <td>{{ p.no_doc }}</td>
+                <td>{{ p.estado_civil }}</td>
+                <td>{{ p.sexo }}</td>
+                <td>{{ p.eps }}</td>
+                <td>{{ p.cesantias }}</td>
+                <td>{{ p.cargo_cod }}</td> <!-- 👍 correcto -->
+                <td>{{ p.sucursal_cod }}</td> <!-- 👍 correcto -->
+                <td>
+                    <a href="/editar/empleado/{{ p.cod_empleado }}" class="btn btn-primary">Editar</a>
+                    <a href="/eliminar/{{ p.cod_empleado }}" class="btn btn-danger"
+                        onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Cerrar sesión</a>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="text-center my-4">Bienvenido(a),{{ username }}</h1>
+<center>
+    <h1>Editar Empleado</h1>
+    <form action="" method="post">
+        Nombre: <input type="text" name="nombre" value="{{ empleado.nombre }}" required><br>
+        <br>
+        Apellido: <input type="text" name="apellido" value="{{ empleado.apellido }}" required><br>
+        <br>
+        Direccion: <input type="text" name="direccion" value="{{ empleado.direccion }}" required><br>
+        <br>
+        Telefono: <input type="text" name="telefono" value="{{ empleado.telefono }}" required><br>
+        <br>
+        Correo: <input type="text" name="correo" value="{{ empleado.correo }}" required><br>
+        <br>
+        no_doc: <input type="text" name="no_doc" value="{{ empleado.no_doc }}" required><br>
+        <br>
+        Estado Civil: <input type="text" name="estado_civil" value="{{ empleado.estado_civil }}" required><br>
+        <br>
+        Sexo: <input type="text" name="sexo" value="{{ empleado.sexo }}" required><br>
+        <br>
+        Eps: <input type="text" name="eps" value="{{ empleado.eps }}" required><br>
+        <br>
+        Cesantias: <input type="text" name="cesantias" value="{{ empleado.cesantias }}" required><br>
+        <br>
+        cargo_cod: <input type="text" name="cargo_cod" value="{{ empleado.cargo_cod }}" required><br>
+        <br>
+        Sucursal: <input type="text" name="sucursal" value="{{ empleado.sucursal }}" required><br>
+        <br>
+        <button type="submit" class="btn btn-primary">actualizar</button>
+    </form>
+    <a href="{{url_for('empleados')}}" class="btn btn-success">Volver</a>
+</center>
+<a href="{{url_for('logout')}}" class="btn btn-danger">cerrar sesion🚀</a>
+{% endblock %}
