@@ -11,6 +11,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "clave-super-segura")
 # ==========================
 db_config = {
     'host': os.environ.get("DB_HOST", "localhost"),
+    'port': os.environ.get("DB_PORT", ""),
     'user': os.environ.get("DB_USER", "root"),
     'password': os.environ.get("DB_PASSWORD", ""),
     'database': os.environ.get("DB_NAME", "supermercado_cuchara_verde")
@@ -428,4 +429,5 @@ def logout():
 # RUN
 # ==========================
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
