@@ -1,4 +1,16 @@
-venv/
+# Python
 __pycache__/
-.env
 *.pyc
+*.pyo
+*.pyd
+
+# Entorno virtual
+venv/
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
